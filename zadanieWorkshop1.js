@@ -43,7 +43,6 @@ function rozwiazanie() {
 }
 
 rozwiazanie();
-console.log(uczniowe);
 console.log(sprawdzZadanie(uczniowe));
 
 // NIE PATRZ TU OK
