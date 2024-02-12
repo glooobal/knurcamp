@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ZADANIE T2 D2</title>
+  </head>
+  <body
+    style="
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    "
+  >
+    <img id="kotik" />
+    <audio controls style="margin-top: 2vh">
+      <source src="./files/mlekosztokurwa.wav" type="audio/wav" />
+    </audio>
+    <p id="roberto">kim jest Robert Burczyk?</p>
+    <input / style="margin-bottom: 2vh" placeholder="jak uwazasz?">
+    <button style="margin-bottom: 2vh" onclick="klik()">
+      poznaj odpowiedz
+    </button>
+    <script>
+      let number = 0;
+
+      const robertImages = [
+        "https://gamepedia.cursecdn.com/lolesports_gamepedia_en/thumb/e/e3/Robertnzq.jpg/220px-Robertnzq.jpg?version=d63764717aeb6564d0ab608e191bbc18",
+        "https://i.ytimg.com/vi/AKXNeH-pc2U/maxresdefault.jpg",
+      ];
+
+      const robertImage = document.createElement("img");
+      robertImage.height = 256;
+      robertImage.width = 256;
+
+      document.body.appendChild(robertImage);
+
+      function zmienObrazekRoberta() {
+        robertImage.src = robertImages[number];
+        number = (number + 1) % robertImages.length;
+      }
+
+      zmienObrazekRoberta();
+      setInterval(zmienObrazekRoberta, 3000);
+
+      const kotikImage = document.getElementById("kotik");
+
+      kotikImage.addEventListener("click", function () {
+        alert("kotik");
+      });
+
+      const xhr = new XMLHttpRequest();
+      xhr.open("GET", "https://placekitten.com/512/512", true);
+      xhr.responseType = "blob";
+
+      xhr.onload = function () {
+        const blob = xhr.response;
+        const reader = new FileReader();
+        reader.readAsDataURL(blob);
+
+        reader.onload = function () {
+          const dataUrl = reader.result;
+          kotikImage.src = dataUrl;
+        };
+      };
+
+      xhr.send();
+
+      function klik() {
+        const text = document.getElementById("roberto");
+        text.innerText = "robert burczyk jest totalnym kozakiem";
+      }
+    </script>
+  </body>
+</html>
